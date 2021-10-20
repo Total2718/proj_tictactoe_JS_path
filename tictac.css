@@ -1,0 +1,40 @@
+header {
+    position: relative;
+    top: -10px;
+    left: -10px;
+    font-size: 20px;
+    height: 10vh;
+    width: 110vw;
+    background-color: blue;
+    margin: 0 auto;
+    align-content: center;
+
+}
+#title {
+    position: relative;
+   font-size: 90px;
+   margin: 0 auto;
+   width: 30vw;
+    left: 0vw;
+}
+
+html {
+    background-color:thistle;
+}
+#board_grid {
+    display: grid;
+    grid-template-columns: repeat(3, 32.94%);
+    grid-template-rows: repeat(3, 33%);
+    gap: 10px;
+    background-color: teal;
+    height: 85vh;
+    width: 66%;
+    margin: 0 auto ;
+    
+    
+}
+
+#board_grid > div {
+    background-color: thistle;
+}
+
