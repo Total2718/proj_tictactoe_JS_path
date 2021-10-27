@@ -3,19 +3,39 @@ header {
     top: -10px;
     left: -10px;
     font-size: 20px;
-    height: 10vh;
+    height: 13vh;
     width: 110vw;
     background-color: blue;
     margin: 0 auto;
     align-content: center;
+    border-style: solid;
 
 }
 #title {
     position: relative;
-   font-size: 90px;
-   margin: 0 auto;
-   width: 30vw;
+   font-size: 6vw;
+   margin-left: 15%;
+   margin-top: 0.3%;
+   width: 35vw;
     left: 0vw;
+}
+
+
+#ng_button {
+    display: inline-block;
+    background-color: rgb(174, 174, 211);
+    position: relative;
+    margin-left: 56.3%;
+    top: -6vw;
+    width: 15vw;
+    height: 7.5vh;
+    font-size: 25px;
+}
+
+#lower_div {
+    display: grid;
+    grid-template-columns: 30vw 30vw 30vw;
+    grid-template-rows: 8vh;
 }
 
 html {
@@ -27,9 +47,16 @@ html {
     grid-template-rows: repeat(3, 33%);
     gap: 10px;
     background-color: teal;
-    height: 85vh;
-    width: 66%;
-    margin: 0 auto ;
+    height: 75vh;
+    width: 86%;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 0;
+    grid-row-end: 1;
+    /* margin: 0 auto; */
+    margin-left: 22%;
+    margin-right: 0%;
+    margin-top: 1%;
     
     
 }
@@ -38,3 +65,28 @@ html {
     background-color: thistle;
 }
 
+#board_grid > div:hover{
+    filter: opacity(0.9);
+}
+
+#player_names {
+    grid-column-start: 0;
+    grid-column-end: 1;
+    grid-row-start: 0;
+    grid-row-end: 1;
+    width: 30vw;
+    line-height: 20vh;
+    margin-top: 25%;
+    font-size: 3vw;
+    
+    
+}
+
+.player_card {
+    height: 20vh;
+    background-color: cadetblue;
+    text-align: center;
+    border-style: solid;
+    margin-bottom: 5%;
+    
+}
