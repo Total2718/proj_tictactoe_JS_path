@@ -4,7 +4,7 @@ header {
     left: -10px;
     font-size: 20px;
     height: 13vh;
-    width: 110vw;
+    width: 98vw;
     background-color: blue;
     margin: 0 auto;
     align-content: center;
@@ -25,7 +25,7 @@ header {
     display: inline-block;
     background-color: rgb(174, 174, 211);
     position: relative;
-    margin-left: 56.3%;
+    margin-left: 62.8%;
     top: -6vw;
     width: 15vw;
     height: 7.5vh;
@@ -41,6 +41,7 @@ header {
 html {
     background-color:thistle;
 }
+
 #board_grid {
     display: grid;
     grid-template-columns: repeat(3, 32.94%);
@@ -57,12 +58,13 @@ html {
     margin-left: 22%;
     margin-right: 0%;
     margin-top: 1%;
-    
+    font-size: 15rem;
     
 }
 
 #board_grid > div {
     background-color: thistle;
+    text-align: center;
 }
 
 #board_grid > div:hover{
@@ -88,5 +90,103 @@ html {
     text-align: center;
     border-style: solid;
     margin-bottom: 5%;
+    filter:grayscale(0.9);
     
+}
+
+.player_card.active {
+    filter:grayscale(0);
+    animation-name: test;
+    animation-duration: 1.5s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes test{
+    0% {filter:brightness(100%);}
+    5% {filter:brightness(110%);}
+    10% {filter:brightness(120%);}
+    15% {filter:brightness(130%);}
+    20% {filter:brightness(140%);}
+    25% {filter:brightness(150%);}
+    30% {filter:brightness(160%);}
+    35% {filter:brightness(170%);}
+    40% {filter:brightness(180%);}
+    45% {filter:brightness(190%);}
+    50% {filter:brightness(200%);}
+    55% {filter:brightness(190%);}
+    60% {filter:brightness(180%);}
+    65% {filter:brightness(170%);}
+    70% {filter:brightness(160%);}
+    75% {filter:brightness(150%);}
+    80% {filter:brightness(140%);}
+    85% {filter:brightness(130%);}
+    90% {filter:brightness(120%);}
+    95% {filter:brightness(110%);}
+    100% {filter:brightness(100%);}
+    
+    
+    
+}
+
+
+
+#name_form {
+    position: fixed;
+    margin: 0 auto;
+    top: 35vh;
+    left: 34vw;
+    z-index: 2;
+    width: 20vw;
+    height: 30vh;
+    background-color: crimson;
+    transform: scale(0);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#name_form.active {
+    transform: scale(1);
+}
+
+
+#shadow {
+    height: 110vh;
+    width: 100vw;
+    position: fixed;
+    top: 0vh;
+    left: 0vw;
+    z-index: 1;
+    background-color: black;
+    filter:opacity(0.9);
+    transform: scale(0);
+}
+
+#shadow.active {
+    transform: scale(1);
+}
+
+.player_name_slot {
+    width: 70%;
+}
+.input_slots {
+    width: 50%;
+}
+
+.input_slots {
+    width: 80%;
+}
+
+#play_button {
+    width: 30%;
+    height: 15%;
+    background-color: rgb(214, 35, 89);
+    border-style: solid;
+    border-color: black;
+    border-width: 0.5px;
+}
+
+.name_labels {
+    font-size: 25px;
 }
