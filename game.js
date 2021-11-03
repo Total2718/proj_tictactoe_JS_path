@@ -73,8 +73,13 @@ const Game = function(player1, player2) {
     const symbolSwitch = () => {
         if (this.current_symbol == "X"){
             this.current_symbol = "O";
+            this.player1_card.classList.remove("active");
+            this.player2_card.classList.add("active");
+
         } else {
             this.current_symbol = "X"; 
+            this.player2_card.classList.remove("active");
+            this.player1_card.classList.add("active");
         }
     }
 
@@ -86,9 +91,7 @@ const Game = function(player1, player2) {
             new_tac_slot.classList.add("tac_slots");
             
             // console.log(i);
-            new_tac_slot.addEventListener("click", function(e){
-                selectSpot(e.target, i);
-            });
+            new_tac_slot.addEventListener("click", selectSpot);
             this.board_grid.appendChild(new_tac_slot);
 
         }
@@ -96,23 +99,20 @@ const Game = function(player1, player2) {
 
     this.makeNamePlates = () => {
         let names_div = document.getElementById("player_names");
-        let player1_name = document.createElement("DIV");
-        player1_name.classList.add("player_card");
-        player1_name.innerHTML = this.player_1;
-        let player2_name = document.createElement("DIV");
-        player2_name.classList.add("player_card");
-        player2_name.innerHTML = this.player_2;
-        names_div.appendChild(player1_name);
-        names_div.appendChild(player2_name);
-        player1_name.classList.add("active");
+        this.player1_card = document.createElement("DIV");
+        this.player1_card.classList.add("player_card");
+        this.player1_card.innerHTML = this.player_1;
+        this.player2_card = document.createElement("DIV");
+        this.player2_card.classList.add("player_card");
+        this.player2_card.innerHTML = this.player_2;
+        names_div.appendChild(this.player1_card);
+        names_div.appendChild(this.player2_card);
+        this.player1_card.classList.add("active");
     }
 
     const addSymbol = (current_slot, slot_number) => {
        current_slot.innerHTML = this.current_symbol;
        this.board[slot_number] = this.current_symbol;
-       console.log(this.board[slot_number]);
-       console.log(this.board);
-       console.log(possible_wins);
     }
 
     const checkSlot = (slot_number) => {
@@ -125,17 +125,21 @@ const Game = function(player1, player2) {
         }
     };
 
-    const selectSpot = (current_slot, slot_number) => {
+    const selectSpot = (slot_number, event) => {
         let already_taken = checkSlot(slot_number);
         if (already_taken == false){
-            addSymbol(current_slot, slot_number);
+            addSymbol(event.target, slot_number);
             let game_over = check_win();
             if (game_over == true){
                 gameOver();
-            } else if (game_over == false && this.board.length == 9){
+                disable_board();
+            } else if (game_over == "draw"){
                 alert("Neither of you win and the board has been completely filled.");
+                disable_board();
                 
             }
+            current_slot.classList.remove("tac_slots");
+            current_slot.classList.add("selected_slots");
             symbolSwitch();
         } else {
             alert("Spot already taken.");
@@ -157,13 +161,15 @@ const Game = function(player1, player2) {
 
     }
 
+   
+
 
     const check_win = () => {
         
         let game_won = false;
+        let slots_filled = 0;
         for(let i=0; i<possible_wins.length; i++){
             let sequence_count = 0;
-           
             for(let j=0; j<3; j++){
                
                 
@@ -178,6 +184,18 @@ const Game = function(player1, player2) {
                 game_won = true;
             }
         }
+
+        for(let i=0; i<this.board.length; i++){
+            if (this.board[i] == "X" || this.board[i] == "O"){
+                slots_filled++;
+            }
+        }
+
+        if(slots_filled == 9 && game_won == false){
+            game_won = "draw";
+        }
+
+        
         
         console.log(game_won);
         return game_won;

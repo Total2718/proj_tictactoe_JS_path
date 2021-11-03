@@ -62,12 +62,17 @@ html {
     
 }
 
-#board_grid > div {
+.tac_slots{
     background-color: thistle;
     text-align: center;
 }
 
-#board_grid > div:hover{
+.selected_slots {
+    background-color: thistle;
+    text-align: center;
+}
+
+.tac_slots:hover{
     filter: opacity(0.9);
 }
 
@@ -190,3 +195,4 @@ html {
 .name_labels {
     font-size: 25px;
 }
+
