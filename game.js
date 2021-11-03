@@ -51,13 +51,12 @@ const Game = function(player1, player2) {
     }
     this.player_1 = player1;
     this.player_2 = player2;
-    this.board = [];
+    this.board = document.getElementsByClassName("tac_board_slots");
     this.current_symbol = "X";
     this.board_grid = document.createElement("DIV");
     this.board_grid.setAttribute("id","board_grid");
     lower_div.appendChild(this.board_grid);
     
-
     let possible_wins = [
         [0, 1, 2],
         [3, 4, 5],
@@ -83,17 +82,13 @@ const Game = function(player1, player2) {
         }
     }
 
-    
     this.makeNewBoard = () => {
-        
         for (let i=0; i<9; i++) {
             let new_tac_slot = document.createElement("DIV");
             new_tac_slot.classList.add("tac_slots");
-            
-            // console.log(i);
+            new_tac_slot.classList.add("tac_board_slots");
             new_tac_slot.addEventListener("click", selectSpot);
             this.board_grid.appendChild(new_tac_slot);
-
         }
     }
 
@@ -110,37 +105,36 @@ const Game = function(player1, player2) {
         this.player1_card.classList.add("active");
     }
 
-    const addSymbol = (current_slot, slot_number) => {
+    const addSymbol = (current_slot) => {
        current_slot.innerHTML = this.current_symbol;
-       this.board[slot_number] = this.current_symbol;
+    
     }
 
-    const checkSlot = (slot_number) => {
-        if (this.board[slot_number] == "X"){
+    const checkSlot = (current_slot) => {
+        if (current_slot.target.innerHTML == "O" || current_slot.target.innerHTML == "X"){
             return true;
-        } else if (this.board[slot_number] == "O"){
-            return true;
-        } else {
+        }else {
             return false;
         }
-    };
-
-    const selectSpot = (slot_number, event) => {
-        let already_taken = checkSlot(slot_number);
+    }
+    const selectSpot = (event) => {
+        let already_taken = checkSlot(event);
         if (already_taken == false){
-            addSymbol(event.target, slot_number);
+            addSymbol(event.target);
             let game_over = check_win();
             if (game_over == true){
                 gameOver();
                 disable_board();
             } else if (game_over == "draw"){
                 alert("Neither of you win and the board has been completely filled.");
-                disable_board();
+                disable_board;
                 
+            } else if (game_over == false) {
+                symbolSwitch();
             }
-            current_slot.classList.remove("tac_slots");
-            current_slot.classList.add("selected_slots");
-            symbolSwitch();
+            event.target.classList.remove("tac_slots");
+            event.target.classList.add("selected_slots");
+            
         } else {
             alert("Spot already taken.");
         }
@@ -171,41 +165,33 @@ const Game = function(player1, player2) {
         for(let i=0; i<possible_wins.length; i++){
             let sequence_count = 0;
             for(let j=0; j<3; j++){
-               
-                
-                if(this.board[possible_wins[i][j]] == this.current_symbol){
-                    
+                if(this.board[possible_wins[i][j]].innerHTML == this.current_symbol){
                     sequence_count++;
-                    
                 }
             }
-            
             if(sequence_count == 3){
                 game_won = true;
             }
         }
-
         for(let i=0; i<this.board.length; i++){
             if (this.board[i] == "X" || this.board[i] == "O"){
                 slots_filled++;
             }
         }
-
         if(slots_filled == 9 && game_won == false){
             game_won = "draw";
         }
-
-        
-        
         console.log(game_won);
         return game_won;
+    }
 
+    const disable_board = () => {
+        for(let i=0; i<9; i++){
+            this.board[i].removeEventListener("click", selectSpot);
+            this.board[i].classList.remove("tac_slots");
+            this.board[i].classList.add("selected_slots");
+        }
     }
 
 
-
-    
-    
 }
-
-
